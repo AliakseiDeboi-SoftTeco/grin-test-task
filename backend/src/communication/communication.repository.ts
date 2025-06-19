@@ -1,21 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import {CommunicationDTO} from "./dto/communication.dto";
+import { Inject, Injectable } from '@nestjs/common';
+import { CommunicationDTO } from './dto/communication.dto';
+import { DATASET } from '../common/data/data.provider';
 
 @Injectable()
 export class CommunicationRepository {
-    private readonly communication: CommunicationDTO[];
+  constructor(
+    @Inject(DATASET)
+    private readonly dataset: { communication: CommunicationDTO[] },
+  ) {}
 
-    constructor() {
-        const raw = readFileSync(
-            join(__dirname, '..', '..', 'data', 'dataset.json'),
-            'utf8',
-        );
-        this.communication = JSON.parse(raw).communication;
-    }
-
-    public getCommunications(): CommunicationDTO[] {
-        return this.communication;
-    }
+  public getCommunications(): CommunicationDTO[] {
+    return this.dataset.communication;
+  }
 }

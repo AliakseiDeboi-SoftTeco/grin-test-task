@@ -4,10 +4,10 @@ import { EmployeeQueryDTO } from './dto/employee-query.dto';
 
 @Controller('employees')
 export class EmployeeController {
-    constructor(private readonly employeeService: EmployeeService) {}
+  constructor(private readonly employeeService: EmployeeService) {}
 
-    @Get()
-    public findAll(@Query() query: EmployeeQueryDTO) {
-        return this.employeeService.findAll(query);
-    }
+  @Get()
+  public findAll(@Query() query: EmployeeQueryDTO) {
+    return this.employeeService.findAll(query);
+  }
 }

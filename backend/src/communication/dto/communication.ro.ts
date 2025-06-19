@@ -1,12 +1,12 @@
-import {IsArray, IsInt, IsNotEmpty} from "class-validator";
-import {CommunicationDTO} from "./communication.dto";
+import { IsArray, IsInt, IsNotEmpty } from 'class-validator';
+import { CommunicationDTO } from './communication.dto';
 
 export class CommunicationRO {
-    @IsNotEmpty()
-    @IsArray()
-    items: CommunicationDTO[];
+  @IsNotEmpty()
+  @IsArray()
+  items: CommunicationDTO[];
 
-    @IsInt()
-    @IsNotEmpty()
-    total: number;
+  @IsInt()
+  @IsNotEmpty()
+  total: number;
 }

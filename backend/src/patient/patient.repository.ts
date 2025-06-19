@@ -1,21 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import {PatientRawDTO} from "./dto/patient-raw.dto";
+import { Inject, Injectable } from '@nestjs/common';
+import { PatientRawDTO } from './dto/patient-raw.dto';
+import { DATASET } from '../common/data/data.provider';
 
 @Injectable()
 export class PatientRepository {
-    private readonly patients: PatientRawDTO;
+  constructor(
+    @Inject(DATASET)
+    private readonly dataset: { patientsSatisfaction: PatientRawDTO },
+  ) {}
 
-    constructor() {
-        const raw = readFileSync(
-            join(__dirname, '..', '..', 'data', 'dataset.json'),
-            'utf8',
-        );
-        this.patients = JSON.parse(raw).patientsSatisfaction;
-    }
-
-    public getPatients(): PatientRawDTO {
-        return this.patients;
-    }
+  public getPatients(): PatientRawDTO {
+    return this.dataset.patientsSatisfaction;
+  }
 }

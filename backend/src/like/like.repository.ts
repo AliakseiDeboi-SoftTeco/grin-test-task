@@ -1,21 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import {LikeDTO} from "./dto/like.dto";
+import { Inject, Injectable } from '@nestjs/common';
+import { LikeDTO } from './dto/like.dto';
+import { DATASET } from '../common/data/data.provider';
 
 @Injectable()
 export class LikeRepository {
-    private readonly likes: LikeDTO[];
+  constructor(
+    @Inject(DATASET)
+    private readonly dataset: { likes: LikeDTO[] },
+  ) {}
 
-    constructor() {
-        const raw = readFileSync(
-            join(__dirname, '..', '..', 'data', 'dataset.json'),
-            'utf8',
-        );
-        this.likes = JSON.parse(raw).likes;
-    }
-
-    public getLikes(): LikeDTO[] {
-        return this.likes;
-    }
+  public getLikes(): LikeDTO[] {
+    return this.dataset.likes;
+  }
 }

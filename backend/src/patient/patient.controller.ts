@@ -4,10 +4,10 @@ import { PatientQueryDTO } from './dto/patient-query.dto';
 
 @Controller('patients')
 export class PatientController {
-    constructor(private readonly patientService: PatientService) {}
+  constructor(private readonly patientService: PatientService) {}
 
-    @Get()
-    public findAll(@Query() query: PatientQueryDTO) {
-        return this.patientService.findAll(query);
-    }
+  @Get()
+  public findAll(@Query() query: PatientQueryDTO) {
+    return this.patientService.findAll(query);
+  }
 }
