@@ -1,0 +1,1 @@
+export const MINUTES_SAVED_PER_MEETING = 5;
